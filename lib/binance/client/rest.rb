@@ -27,7 +27,13 @@ module Binance
             req.url ENDPOINTS[method[:endpoint]]
             req.params.merge! options.map { |k, v| [camelize(k.to_s), v] }.to_h
           end
-          response.body
+          
+          r = response.body
+          if r['code'] && r['code'] < 0
+            raise StandardError.new(r['msg'])
+          end 
+          r
+          
         end
       end
 
