@@ -28,7 +28,10 @@ module Binance
             req.url ENDPOINTS[method[:endpoint]]
             req.params.merge! options.map { |k, v| [camelize(k.to_s), v] }.to_h
           end
-          response.body       
+          
+          # We'll pass back the weight in the response to give the client more flexibility
+          response.body.merge('x-mbx-used-weight' => response.headers['x-mbx-used-weight'].to_i )
+
         end
       end
 
