@@ -32,7 +32,10 @@ module Binance
         account_status:   'v3/accountStatus.html',
         system_status:    'v3/systemStatus.html',
         withdraw_fee:     'v3/assetDetail.html',
-        dust_log:         'v3/userAssetDribbletLog.html'
+        dust_log:         'v3/userAssetDribbletLog.html',
+        
+        # Savings API Endpoint
+        savings_info:     'v1/lending/union/account'
       }.freeze
     end
   end

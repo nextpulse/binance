@@ -19,6 +19,7 @@ module Binance
         @clients[:signed]   = signed_client api_key, secret_key, adapter
         @clients[:withdraw] = withdraw_client api_key, secret_key, adapter
         @clients[:public_withdraw] = public_withdraw_client adapter
+        @clients[:savings] = savings_client api_key, secret_key, adapter
       end
 
       METHODS.each do |method|
@@ -27,7 +28,7 @@ module Binance
             req.url ENDPOINTS[method[:endpoint]]
             req.params.merge! options.map { |k, v| [camelize(k.to_s), v] }.to_h
           end
-                 
+          response.body       
         end
       end
 
