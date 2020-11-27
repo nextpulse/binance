@@ -29,9 +29,14 @@ module Binance
             req.params.merge! options.map { |k, v| [camelize(k.to_s), v] }.to_h
           end
           
-          # We'll pass back the weight in the response to give the client more flexibility
-          response.body.merge('x-mbx-used-weight' => response.headers['x-mbx-used-weight'].to_i )
-
+          # TODO revisit this. For now, quick hack to avoid limit issues
+          # downside: this could be the last call and unnecessary delay
+          if response.headers['x-mbx-used-weight'].to_i > 1200
+            sleep 70.seconds
+          end
+                    
+          response.body
+ 
         end
       end
 
